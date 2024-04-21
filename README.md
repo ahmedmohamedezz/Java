@@ -1,34 +1,50 @@
-# Chapter 1 : Java Fundamentals 
+# Chapter 2 : Data Types & operators
 
-### Protability
+### Data Types
 
-Java introduced an important feature that was missed at the time
-it's created, which is the portability
+Java doesn't have the concept of _type less_ variables
 
-Other languages like **c**, and **c++** are designed to compile for a specific machiene (target CPU), and _compilers_ are expensive & time consuming to create
+Java compiler does **_type checking_** to check for type compatibility
 
-Java is a platform-independent language that is used to create software to be embedded in various electronic devices
+The type of variable determine what operations are allowed on it, and how much memory it should acquire
 
----
+Java has 8 primitive types
 
-### Java & Internet
+- boolean: true\false
+- byte: 8 bit integer
+- char: character
+- double: double precision floating point
+- float: single precision floating point
+- int: integer
+- long: long integer
+- short: short integer
 
-Java introduced **_applets_**, which is a programs that can be transmitted over the internet & automatically executed (download + run) by _java-compatible browser_ 
+Primitive means that those types are not object, they are normal _binary values_, and all other types are constructed from those types
 
-Applets are used to display server msgs, or provide simple functionality
+> Those types are not an objects because of efficiency concerns
 
-> You may have heard about **_servlets_**, as applets runs & provides functionality on the client side, servlets also provide functionalities _but_ on the **_server side_**
+You may notice that there several numerical types in java, each has different memory size
 
----
+- byte: 8 bits
+- shor: 16
+- int: 32
+- long: 64
+- float: 32
+- double: 64
 
-### Bytecode
+> Java doesn't support **_unsigned integers_**
 
-The java compiler doesn't provide executable file as other languages compilers, instead it generates a **_bytecode_**
+Characters in java are not 8bit quantities like other languages, java uses **_Unicode_**
 
-> Bytecode is an optimized set of instructions executed by java virtaul machine (**_JVM_**)
+So, a char is represented as _unsigned 16-bit_ type
 
+> Note that **_ASCII_** chars are a subset of **_Unicode_**, which means all ASCII chars are still valid in java
 
+> Starting from Java7, you can use \_ in numeric values to increase it's readability `int x = 1_000_000`
 
+> Java supports also assigning octal (0 + val) & hex (0x + val) & binary (0b + val) values to numerical variables `oct = 011` and `hex = 0xFF` and `0B1001`
+
+> You're **not allowed** to create 2 variables with the same name in the same scope (or if one enclose the other)
 
 
 
