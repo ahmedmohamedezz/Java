@@ -46,6 +46,38 @@ So, a char is represented as _unsigned 16-bit_ type
 
 > You're **not allowed** to create 2 variables with the same name in the same scope (or if one enclose the other)
 
+---
 
+### Operators
+
+> `%` operator can be used with integer & floating point types
+
+> note that `y = ++x` and `y = x++` are not the same
+
+> `^` is the logical xor operator
+
+> note that short-circuit operators `&&` and `||` will evaluate the second argument only if necessary, while `&` and `|` will always evaluate all operands
+
+See the next example for illustration
+
+```java
+// expression (n % d) will cause division by zero exception if d = 0
+
+int d = 0;
+if(d != 0 && (n % d) == 0)   // prevents division by 0
+  n /= d;
+
+if(d != 0 & (n % d) == 0)   // cause division by 0
+  n /= d;
+```
+
+> You can assign several variables in 1 statement `x = y = z = 100`, because `=` operator in java returns the value of the RHS of the expression, thus `z = 100` will return `100`
+
+> Java will automatically cast the type of variable in assignment statement only if both types are compatible & destination are larger type, `intX = byteY`
+
+> You can cast manually => `(int) (1.5 * x / y)`
+
+> Java performs type promotion in expressions, it promot `char`, `byte`, `short` to `int`
+> then to `long` ,`float`, `double` if one of the variables is one of those (cast all to the widest variable type & atleast set all to `int`)
 
 
