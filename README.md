@@ -1,83 +1,144 @@
-# Chapter 2 : Data Types & operators
+# Chapter 3 : Input & Control Statements
 
-### Data Types
+### Taking Input
 
-Java doesn't have the concept of _type less_ variables
+To read input from the console, you need to define a scanner object
 
-Java compiler does **_type checking_** to check for type compatibility
+```java
+Scanner input = new Scanner(System.in);
 
-The type of variable determine what operations are allowed on it, and how much memory it should acquire
+// we can read all data types except char
 
-Java has 8 primitive types
+// Methods of scanner object
+input.next();  // reads one word (no spaces)
+input.nextLine();  // reads whole line (with spaces)
+input.nextInt();
+input.nextDouble();
+input.nextFloat();
+input.nextLong();
+input.nextBoolean();
+input.nextByte();
+```
 
-- boolean: true\false
-- byte: 8 bit integer
-- char: character
-- double: double precision floating point
-- float: single precision floating point
-- int: integer
-- long: long integer
-- short: short integer
+```java
+// To read char
+char c = (char) System.in.read();
+c = scanner.next().charAt(0);
+```
 
-Primitive means that those types are not object, they are normal _binary values_, and all other types are constructed from those types
-
-> Those types are not an objects because of efficiency concerns
-
-You may notice that there several numerical types in java, each has different memory size
-
-- byte: 8 bits
-- shor: 16
-- int: 32
-- long: 64
-- float: 32
-- double: 64
-
-> Java doesn't support **_unsigned integers_**
-
-Characters in java are not 8bit quantities like other languages, java uses **_Unicode_**
-
-So, a char is represented as _unsigned 16-bit_ type
-
-> Note that **_ASCII_** chars are a subset of **_Unicode_**, which means all ASCII chars are still valid in java
-
-> Starting from Java7, you can use \_ in numeric values to increase it's readability `int x = 1_000_000`
-
-> Java supports also assigning octal (0 + val) & hex (0x + val) & binary (0b + val) values to numerical variables `oct = 011` and `hex = 0xFF` and `0B1001`
-
-> You're **not allowed** to create 2 variables with the same name in the same scope (or if one enclose the other)
+> We pass `System.in` to tell java that we will read from console, not (file, ...)
 
 ---
 
-### Operators
+### Control Statements
 
-> `%` operator can be used with integer & floating point types
-
-> note that `y = ++x` and `y = x++` are not the same
-
-> `^` is the logical xor operator
-
-> note that short-circuit operators `&&` and `||` will evaluate the second argument only if necessary, while `&` and `|` will always evaluate all operands
-
-See the next example for illustration
+Explanation will be through examples
 
 ```java
-// expression (n % d) will cause division by zero exception if d = 0
+int x = 1;
 
-int d = 0;
-if(d != 0 && (n % d) == 0)   // prevents division by 0
-  n /= d;
+if(x == 1)  // with or without { }
+  System.out.println(1);
 
-if(d != 0 & (n % d) == 0)   // cause division by 0
-  n /= d;
+if(x > 1) { // nested if's
+  if(x == 1)
+    System.out.println(1);
+  else if(x == 2)
+    System.out.println(2);
+  else {
+    // ...
+  }
+}
+
+// another way
+switch (x) {
+  case 1:
+    // ..
+    break;
+
+  case 2:
+    // ...
+    break;
+
+  default:
+    // ...
+}
 ```
 
-> You can assign several variables in 1 statement `x = y = z = 100`, because `=` operator in java returns the value of the RHS of the expression, thus `z = 100` will return `100`
+> Before JDK7, expression in the switch statement must be (byte, short, int, char), after it => could also be a string
 
-> Java will automatically cast the type of variable in assignment statement only if both types are compatible & destination are larger type, `intX = byteY`
+Java allows nested switch statements
 
-> You can cast manually => `(int) (1.5 * x / y)`
+---
 
-> Java performs type promotion in expressions, it promot `char`, `byte`, `short` to `int`
-> then to `long` ,`float`, `double` if one of the variables is one of those (cast all to the widest variable type & atleast set all to `int`)
+### Looping
+
+```java
+for(init; condition; counter) {
+  // ...
+}
+
+int sum = 0;
+for(int i=1; i<=5; sum += i++)  // valid loop
+
+// WHILE loop
+while(condition) {
+  // ...
+}
 
 
+// DO WHILE loop
+do {
+  // ...
+} while(condition);
+```
+
+Break, and continue
+
+```java
+while(cond) {
+  if(c1) // break from loop
+    break;
+
+  if(c2)
+    continue; // skip iteration
+}
+
+// break as goto
+for(int i=0; i<5; ++i)
+one : {
+    for(int j=0; j<5; ++j) {
+      if(j > 2)
+          break one; // go to 'one'
+          System.out.println(j);  // repeat 0, 1, 2 'i' times
+    }
+}
+
+
+// The following code won't compile because the one clause
+// doesn't enclose the other loop
+one: for(int i=0; i<3; i++) {
+    System.out.print("Pass " + i + ": ");
+}
+
+for(int j=0; j<100; j++) {
+    if(j == 10) break one; // WRONG
+}
+```
+
+> When using break with a label, the label must be on a block that contains the break
+
+> The else statement is associated with the last if
+
+Look at the following
+
+```java
+// The else belongs to which if ? inner if
+
+if (x == 1)
+    if (y == 1) {
+        System.out.println("inside 2 if's");
+    }
+else
+    System.out.println("No");
+```
