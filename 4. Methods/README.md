@@ -106,7 +106,7 @@ public class Test {
 public class Fun {
   public static int x = 0;
   Fun(int x) {
-    this.x = x;
+    Fun.x = x;
   }
 }
 
